@@ -68,10 +68,10 @@ int main() {
 
     // Copy Constructor Usage
     Complex c5(c1);     
-    cout << c5 << endl;
+    cout << "Copy of c1, c5 = " << c5 << endl;
     
     // Conversion Constructor Usage
     Complex c6(3.7);
-    cout << c6 << endl;
+    cout << "Conversion of double 3.7 to complex c6 = " << c6 << endl;
     return 0;
 }
