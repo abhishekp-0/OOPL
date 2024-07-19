@@ -5,26 +5,26 @@ class Complex {
     
     public: 
         //Constructors
-        Complex() : real(0.0), img(0.0) {}  //Default Constructor
-        Complex(double r, double i) : real(r), img(i) {} //User-defined Constructor
-        Complex(const Complex& other) : real(other.real), img(other.img) {}  //Copy Constructor
-        Complex(double r) : real(r), img(0.0) {}  //Conversion Constructor
+        Complex() : real(0.0), imag(0.0) {}  //Default Constructor
+        Complex(double r, double i) : real(r), imag(i) {} //User-defined Constructor
+        Complex(const Complex& other) : real(other.real), imag(other.imag) {}  //Copy Constructor
+        Complex(double r) : real(r), imag(0.0) {}  //Conversion Constructor
 
 
         // Overload + operator for addition
         Complex operator+(const Complex& other) const {
-            return Complex(real + other.real, img + other.img);
+            return Complex(real + other.real, img + other.imag);
         }
 
         // Overload * operator for multiplication
         Complex operator*(const Complex& other) const {
-            double r = real * other.real - img * other.img;
-            double i = real * other.img + img * other.real;
+            double r = real * other.real - img * other.imag;
+            double i = real * other.imag + img * other.real;
             return Complex(r, i);
         }
         // Input and output operators
         friend ostream& operator<<(ostream& output, const Complex& complex) {
-            output << complex.real << "+" << complex.img << "i";
+            output << complex.real << "+" << complex.imag << "i";
             return output;
         }
 
@@ -32,14 +32,14 @@ class Complex {
             cout << "Enter Real Part: ";
             input >> complex.real;
             cout << "Enter Imaginary Part: ";
-            input >> complex.img;
+            input >> complex.imag;
             return input;
         }
 
     private:
         // Data Members
         double real;  //Real part
-        double img;   //Imaginary part
+        double imag;   //Imaginary part
 };
 
 
