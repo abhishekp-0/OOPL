@@ -13,13 +13,13 @@ class Complex {
 
         // Overload + operator for addition
         Complex operator+(const Complex& other) const {
-            return Complex(real + other.real, img + other.imag);
+            return Complex(real + other.real, imag + other.imag);
         }
 
         // Overload * operator for multiplication
         Complex operator*(const Complex& other) const {
-            double r = real * other.real - img * other.imag;
-            double i = real * other.imag + img * other.real;
+            double r = real * other.real - imag * other.imag;
+            double i = real * other.imag + imag * other.real;
             return Complex(r, i);
         }
         // Input and output operators
