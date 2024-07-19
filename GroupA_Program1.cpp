@@ -2,89 +2,63 @@
 using namespace std;
 
 class Complex {
-    double real;
-    double img;
-public: 
-    Complex(); // Default Constructor
-    friend istream & operator >> (istream &, Complex &); // Input 
-    friend ostream & operator << (ostream &, const Complex &); // Output
-    Complex operator + (Complex); // Addition
-    Complex operator - (Complex); // Subtraction
-    Complex operator * (Complex); // Multiplication
-    Complex operator / (Complex); // Division
-};
-
-Complex::Complex() {
-    real = 0;
-    img = 0;
-}
-
-istream & operator >> (istream & in, Complex & c) {
-    cout << "Enter Real and Imaginary part of the Complex Number: ";
-    in >> c.real >> c.img;
-    return in;
-}
-
-ostream & operator << (ostream & out, const Complex & c) {
-    out << c.real << " + " << c.img << "i";
-    return out;
-}
-
-Complex Complex::operator + (Complex c) {
-    Complex temp;
-    temp.real = real + c.real;
-    temp.img = img + c.img;
-    return temp;
-}
-
-Complex Complex::operator * (Complex c) {
-    Complex temp;
-    temp.real = real * c.real - img * c.img;
-    temp.img = real * c.img + img * c.real;
-    return temp;
-}
-
-int main() {
-    Complex C1, C2, result;
-    char choice;
     
-    do {
-        cout << "Enter Complex Number 1:\n";
-        cin >> C1;
-        cout << "Enter Complex Number 2:\n";
-        cin >> C2;
+    public: 
+        //Constructors
+        Complex() : real(0.0), img(0.0) {}  //Default Constructor
+        Complex(double r, double i) : real(r), imaginary(i) {} //User-defined Constructor
 
-        cout << "Complex Number 1: " << C1 << endl;
-        cout << "Complex Number 2: " << C2 << endl;
-
-        cout << "********** MENU **********\n";
-        cout << "1. Addition\n";
-        cout << "2. Multiplication\n";
-        cout << "3. Exit\n";
-        cout << "Enter your choice (1-5): ";
-        int option;
-        cin >> option;
-
-        switch(option) {
-            case 1:
-                result = C1 + C2;
-                cout << "Addition Result: " << result << endl;
-                break;
-            case 2:
-                result = C1 * C2;
-                cout << "Multiplication Result: " << result << endl;
-                break;
-            case 3:
-                cout << "Exiting program. Goodbye!\n";
-                return 0;
-            default:
-                cout << "Invalid choice. Please enter a number from 1 to 3.\n";
+        // Overload + operator for addition
+        Complex operator+(const Complex& other) const {
+            return Complex(real + other.real, imaginary + other.imaginary);
         }
 
-        cout << "Do you want to perform another operation? (y/n): ";
-        cin >> choice;
-    } while(choice == 'y' || choice == 'Y');
+        // Overload * operator for multiplication
+        Complex operator*(const Complex& other) const {
+            double r = real * other.real - imaginary * other.imaginary;
+            double i = real * other.imaginary + imaginary * other.real;
+            return Complex(r, i);
+        }
+        // Input and output operators
+        friend ostream& operator<<(ostream& os, const Complex& complex) {
+            os << complex.real << "+" << complex.imag << "i";
+            return os;
+        }
 
-    cout << "Thanks for using this program!\n";
+        friend istream& operator>>(istream& is, Complex& complex) {
+            cout << "Enter Real Part: ";
+            is >> complex.real;
+            cout << "Enter Imaginary Part: ";
+            is >> complex.imag;
+            return is;
+        }
+
+    private:
+        double real;
+        double img;
+};
+
+
+
+
+
+int main() {
+    Complex c1(2.3, 4.5);
+    Complex c2(3.4, 5.6);
+    Complex c3;
+
+    // Addition
+    c3 = c1 + c2;
+    cout << "Sum: " << c3 << endl;
+
+    // Multiplication
+    c3 = c1 * c2;
+    cout << "Product: " << c3 << endl;
+
+    // Input example
+    Complex c4;
+    cin >> c4;
+    cout << "You entered: " << c4 << endl;
+
     return 0;
 }
